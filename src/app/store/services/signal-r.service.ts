@@ -21,7 +21,7 @@ export class SignalRService {
   /**
    *
    */
-  constructor(private store: Store, @Inject(PLATFORM_ID) private platformId : Object) {
+  constructor(private store: Store, @Inject(PLATFORM_ID) private platformId: object) {
     if (isPlatformBrowser(this.platformId)) {
       this.hubConnection = new signalR.HubConnectionBuilder()
         .withUrl(environment.signalRUrl + "/signalr")

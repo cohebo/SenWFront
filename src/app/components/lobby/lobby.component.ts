@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { startConnection } from 'src/app/store/actions/senw.actions';
 
@@ -7,12 +7,12 @@ import { startConnection } from 'src/app/store/actions/senw.actions';
   templateUrl: './lobby.component.html',
   styleUrls: ['./lobby.component.css']
 })
-export class LobbyComponent {
-  constructor(
-    private store: Store,
-  ) {}
+
+export class LobbyComponent implements OnInit {
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
+    console.log("ddd");
     this.store.dispatch(startConnection());
   }
 }
