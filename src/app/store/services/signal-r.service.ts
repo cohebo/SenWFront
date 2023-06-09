@@ -4,20 +4,27 @@ import { Store } from "@ngrx/store";
 import { from, Observable } from "rxjs";
 import { isPlatformBrowser } from "@angular/common";
 import { map } from "rxjs/operators";
+import {
+  CreateGroupModel,
+  GroupCreatedModel,
+} from "./signal-r.models";
+import { environment } from "src/environments/environment";
+import { connecting, connectingFailed, connectingSuccess, disconnected, reconnectingSuccess } from "../actions/senw.actions";
 
 @Injectable({
   providedIn: "root",
 })
+
 export class SignalRService {
-  private hubConnection: signalR.HubConnection;
+  private hubConnection!: signalR.HubConnection;
 
   /**
    *
    */
-  constructor(private store: Store, @Inject(PLATFORM_ID) private platformId) {
+  constructor(private store: Store, @Inject(PLATFORM_ID) private platformId : Object) {
     if (isPlatformBrowser(this.platformId)) {
       this.hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl(environment.signalRUrlQuiz + "/signalr")
+        .withUrl(environment.signalRUrl + "/signalr")
         .configureLogging(signalR.LogLevel.Error)
         .withAutomaticReconnect([0, 2000, 5000, 10000, 15000, 30000])
         .build();
@@ -67,7 +74,7 @@ export class SignalRService {
 
   public createGroep(model: CreateGroupModel): Observable<GroupCreatedModel> {
     const promise = this.hubConnection.invoke<GroupCreatedModel>(
-      "CreateGroep",
+      "CreateGroup",
       model
     );
     this.addGroupEventListeners();
@@ -104,6 +111,6 @@ export class SignalRService {
   }
 
   public removeGroupEventListeners = () => {
-     this.hubConnection.off("test");
+     //this.hubConnection.off("test");
   };
 }

@@ -1,4 +1,4 @@
-export interface CreateGroepModel {
+export interface CreateGroupModel {
     groupName: string;
   }
 
