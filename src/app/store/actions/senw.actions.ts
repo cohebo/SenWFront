@@ -1,6 +1,6 @@
 // connections
 
-import { createAction } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
 
 export const startConnection = createAction(
     "[SenW Connection] Start connection"
@@ -20,3 +20,8 @@ export const connectingFailed = createAction(
 );
 
 export const disconnected = createAction("[SenW Connection] Disconnected");
+
+export const createGroup = createAction(
+    "[SenW Connection] Connection failed",
+    props<{groupName: string}>()
+);

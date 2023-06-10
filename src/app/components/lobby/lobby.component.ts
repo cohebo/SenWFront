@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { startConnection } from 'src/app/store/actions/senw.actions';
+import { createGroup, startConnection } from 'src/app/store/actions/senw.actions';
+import { CreateGroupModel } from 'src/app/store/services/signal-r.models';
 
 @Component({
   selector: 'app-lobby',
@@ -8,11 +9,15 @@ import { startConnection } from 'src/app/store/actions/senw.actions';
   styleUrls: ['./lobby.component.css']
 })
 
+
 export class LobbyComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    console.log("ddd");
+    const group: CreateGroupModel = {
+      groupName: 'lalala',
+    };
     this.store.dispatch(startConnection());
+    this.store.dispatch(createGroup(group));
   }
 }
