@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Group } from 'src/app/models/group';
 import { SenwService } from 'src/app/service/senw.service';
 import { createGroup, startConnection } from 'src/app/store/actions/senw.actions';
+import { selectGroups } from 'src/app/store/selectors/senw.selectors';
 import { CreateGroupModel } from 'src/app/store/services/signal-r.models';
+import { SignalRService } from 'src/app/store/services/signal-r.service';
 
 @Component({
   selector: 'app-lobby',
@@ -13,6 +16,10 @@ import { CreateGroupModel } from 'src/app/store/services/signal-r.models';
 
 export class LobbyComponent implements OnInit {
   groups: Array<Group> = [];
+  groups$: Observable<Array<Group>> = this.store.select(
+    selectGroups
+  );
+
   constructor(private store: Store, private senwService: SenwService) {}
 
   ngOnInit(): void {
@@ -20,16 +27,18 @@ export class LobbyComponent implements OnInit {
       groupName: 'lalala',
     };
     this.store.dispatch(startConnection());
-    this.store.dispatch(createGroup(group));
-    this.getGroups();
+
+    //vies even 2 seconden wachten op op connection te wachten. moet anders.
+    setTimeout(() => {
+      this.store.dispatch(createGroup(group));
+      this.getGroups();
+    }, 2000);
   }
 
   getGroups() {
     this.senwService.GetGroups().subscribe(
       (groups: Array<Group>) => {
         // Process the groups data
-        groups.forEach(g => {
-        });
         this.groups = groups;
       },
       (error: any) => {

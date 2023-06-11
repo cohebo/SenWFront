@@ -25,7 +25,7 @@ export class SignalRService {
     if (isPlatformBrowser(this.platformId)) {
       this.hubConnection = new signalR.HubConnectionBuilder()
         //.withUrl(environment.signalRUrl + "/signalr")
-        .withUrl("https://localhost:7299/signalr")
+        .withUrl(environment.signalRUrl + "/signalr")
         .configureLogging(signalR.LogLevel.Error)
         .withAutomaticReconnect([0, 2000, 5000, 10000, 15000, 30000])
         .build();
@@ -73,10 +73,10 @@ export class SignalRService {
     }
   }
 
-  public createGroep(model: CreateGroupModel): Observable<GroupCreatedModel> {
+  public createGroup(model: CreateGroupModel): Observable<GroupCreatedModel> {
     const promise = this.hubConnection.invoke<GroupCreatedModel>(
       "CreateGroup",
-      model
+      model.groupName
     );
     this.addGroupEventListeners();
     const observable = from(promise)
