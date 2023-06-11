@@ -24,7 +24,8 @@ export class SignalRService {
   constructor(private store: Store, @Inject(PLATFORM_ID) private platformId: object) {
     if (isPlatformBrowser(this.platformId)) {
       this.hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl(environment.signalRUrl + "/signalr")
+        //.withUrl(environment.signalRUrl + "/signalr")
+        .withUrl("https://localhost:7299/signalr")
         .configureLogging(signalR.LogLevel.Error)
         .withAutomaticReconnect([0, 2000, 5000, 10000, 15000, 30000])
         .build();
