@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./new-player.component.scss']
 })
 export class NewPlayerComponent {
+  sliderValue: number = 0;
 
+  onSliderChange(event: any) {
+    this.sliderValue = Number(event.target.value);
+  }
 }

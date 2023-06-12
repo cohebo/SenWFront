@@ -13,6 +13,7 @@ import { SenwEffects } from './store/effects/senw.effects';
 import { reducer } from './store/reducers/senw.reducer';
 import { SignalRService } from './store/services/signal-r.service';
 import { HeaderComponent } from './components/general/header/header.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HeaderComponent } from './components/general/header/header.component';
     StoreModule.forRoot({ senw: reducer }),
     StoreDevtoolsModule.instrument(),
     HttpClientModule,
-    EffectsModule.forRoot([SenwEffects])
+    EffectsModule.forRoot([SenwEffects]),
+    FormsModule,
   ],
   providers: [SenwService, SignalRService],
   bootstrap: [AppComponent]
