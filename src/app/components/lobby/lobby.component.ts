@@ -6,12 +6,11 @@ import { SenwService } from 'src/app/service/senw.service';
 import { createGroup, startConnection } from 'src/app/store/actions/senw.actions';
 import { selectGroups } from 'src/app/store/selectors/senw.selectors';
 import { CreateGroupModel } from 'src/app/store/services/signal-r.models';
-import { SignalRService } from 'src/app/store/services/signal-r.service';
 
 @Component({
   selector: 'app-lobby',
   templateUrl: './lobby.component.html',
-  styleUrls: ['./lobby.component.css']
+  styleUrls: ['./lobby.component.scss']
 })
 
 export class LobbyComponent implements OnInit {

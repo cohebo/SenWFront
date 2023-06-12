@@ -1,0 +1,16 @@
+/**
+ * STYLES FOR SENW
+ **/
+
+.senw-container {
+  background-color: var(--background-body-color);
+  color: var(--font-color);
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  height: 100%;
+  font-size: 18px;
+  &.senw-theme-colors {
+    --background-body-color: #ffffff;
+    --background-body-color-dark: #262423;
+  }
+}

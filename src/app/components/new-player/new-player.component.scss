@@ -1,0 +1,48 @@
+@use "../../general/styles/sens.scss";
+
+.new-player-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+  height: auto;
+  position: relative;
+  margin-top: 40px;
+}
+.image img {
+  width: 60%;
+  max-width: 100%;
+  height: auto;
+}
+
+.avatar-buttons i {
+  padding: 20px;
+}
+
+.filler {
+  margin-top: 50px;
+}
+
+.custom-input {
+  width: 200px;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  color: #333;
+  background-color: #d9d9d9;
+}
+
+.custom-input::placeholder {
+  color: #999;
+}
+
+.custom-input:focus {
+  border-color: #666;
+}
