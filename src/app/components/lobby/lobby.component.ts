@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Group } from 'src/app/models/group';
 import { SenwService } from 'src/app/service/senw.service';
-import { createGroup, startConnection } from 'src/app/store/actions/senw.actions';
+import { createGroup, getGroups, startConnection } from 'src/app/store/actions/senw.actions';
 import { selectGroups } from 'src/app/store/selectors/senw.selectors';
 import { CreateGroupModel } from 'src/app/store/services/signal-r.models';
 
@@ -14,7 +14,6 @@ import { CreateGroupModel } from 'src/app/store/services/signal-r.models';
 })
 
 export class LobbyComponent implements OnInit {
-  groups: Array<Group> = [];
   groups$: Observable<Array<Group>> = this.store.select(
     selectGroups
   );
@@ -26,24 +25,13 @@ export class LobbyComponent implements OnInit {
       groupName: 'lalala',
     };
     this.store.dispatch(startConnection());
-
     //vies even 2 seconden wachten op op connection te wachten. moet anders.
     setTimeout(() => {
-      this.store.dispatch(createGroup(group));
-      this.getGroups();
+      this.store.dispatch(getGroups());
     }, 2000);
-  }
-
-  getGroups() {
-    this.senwService.GetGroups().subscribe(
-      (groups: Array<Group>) => {
-        // Process the groups data
-        this.groups = groups;
-      },
-      (error: any) => {
-        // Handle error
-        console.log(error);
-      }
-    );
+    //vies even 5 seconden wachten op op connection te wachten. moet anders.
+    setTimeout(() => {
+      this.store.dispatch(createGroup(group));
+    }, 5000);
   }
 }

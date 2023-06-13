@@ -3,9 +3,6 @@
     </app-header>
     <main>
         <p>lobby works!</p>
-        <div *ngFor="let group of groups">
-            <h4>{{ group.groupName }}</h4>
-        </div>
 
         <div *ngFor="let signalrGroups of groups$ | async">
             <h4>{{ signalrGroups.groupName }}</h4>

@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { map, mergeMap, tap, withLatestFrom } from "rxjs";
-import { connectingSuccess, createGroup, createGroupSuccess, startConnection } from "../actions/senw.actions";
+import { connectingSuccess, createGroup, createGroupSuccess, getGroups, getGroupsSuccess, startConnection } from "../actions/senw.actions";
 import { selectSenwState } from "../selectors/senw.selectors";
 import { SignalRService } from "../services/signal-r.service";
 
@@ -29,6 +29,25 @@ export class SenwEffects {
     //See https://ngrx.io/guide/effects/lifecycle#non-dispatching-effects for more information.
     { dispatch: false }
   );
+
+  getGroups$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(getGroups),
+      withLatestFrom(this.store.select(selectSenwState)),
+      mergeMap(() =>
+        this.signalRService
+          .getGroups()
+          .pipe(
+            map((groupsModel) =>
+              getGroupsSuccess({
+                model: groupsModel
+              })
+            ),
+            //catchError((error) => of(createGroepError({ e: error })))
+          )
+      )
+    );
+  });
 
   createGroup$ = createEffect(() => {
     return this.actions$.pipe(
