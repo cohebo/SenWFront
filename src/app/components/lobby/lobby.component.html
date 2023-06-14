@@ -1,1 +1,8 @@
-<p>lobby works!!</p>
+<p>lobby works!</p>
+<div *ngFor="let group of groups">
+    <h1>{{ group.groupName }}</h1>
+</div>
+
+<div *ngFor="let signalrGroups of groups$ | async">
+    <h1>{{ signalrGroups.groupName }}</h1>
+</div>
