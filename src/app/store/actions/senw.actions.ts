@@ -1,7 +1,7 @@
 // connections
 
 import { createAction, props } from "@ngrx/store";
-import { GroupCreatedModel } from "../services/signal-r.models";
+import { GroupCreatedModel, GroupModel } from "../services/signal-r.models";
 
 export const startConnection = createAction(
     "[SenW Connection] Start connection"
@@ -22,13 +22,23 @@ export const connectingFailed = createAction(
 
 export const disconnected = createAction("[SenW Connection] Disconnected");
 
+///
+
+export const getGroups = createAction("[SenW] Get groups");
+export const getGroupsSuccess = createAction(
+    "[SenW] Get group success",
+    props<{
+        model: Array<GroupModel>;
+      }>()
+);
+
 export const createGroup = createAction(
-    "[SenW Connection] Create group",
+    "[SenW] Create group",
     props<{groupName: string}>()
 );
 
 export const createGroupSuccess = createAction(
-    "[SenW Connection] Create group success",
+    "[SenW] Create group success",
     props<{
         model: GroupCreatedModel;
       }>()

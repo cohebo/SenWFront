@@ -1,0 +1,32 @@
+<div class="senw-container senw-theme-colors">
+    <app-header>
+    </app-header>
+    <main class="new-player-container">
+        <div class="image">
+            <img src="../../../assets/images/avatar-placeholder.PNG" />
+        </div>
+        <div class="avatar-buttons">
+            <i class="fa fa-arrow-left"></i>
+            <i class="fa fa-arrow-right"></i>
+        </div>
+        <div class="filler"></div>
+        <div class="input-container">
+            <input type="text" class="custom-input" placeholder="name..." />
+        </div>
+        <div class="filter-container">
+
+            <div class="range-slider-container">
+                <input type="range" min="0" max="300" [(ngModel)]="sliderValue" (input)="onSliderChange($event)">
+                <output>{{ sliderValue }} km</output>
+            </div>
+            <i class="fa-solid fa-circle-play fa-xl"></i>
+            <i class="fa-sharp fa-solid fa-gear fa-xl"></i>
+        </div>
+        <div class="filler"></div>
+
+        <i class="fa-solid fa-circle-plus fa-2xl" style="color: #408080;"></i>
+
+
+
+    </main>
+</div>

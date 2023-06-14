@@ -7,19 +7,25 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LobbyComponent } from './components/lobby/lobby.component';
+import { NewPlayerComponent } from './components/new-player/new-player.component';
 import { SenwService } from './service/senw.service';
 import { SenwEffects } from './store/effects/senw.effects';
 import { reducer } from './store/reducers/senw.reducer';
 import { SignalRService } from './store/services/signal-r.service';
+import { HeaderComponent } from './components/general/header/header.component';
+import { FormsModule } from '@angular/forms';
 import { GameFiltersComponent } from './components/lobby/game-filters/game-filters.component';
 import { GroupListComponent } from './components/lobby/group-list/group-list.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     LobbyComponent,
+    NewPlayerComponent,
+    HeaderComponent
     GameFiltersComponent,
     GroupListComponent,
     HeaderComponent,
@@ -31,7 +37,8 @@ import { FooterComponent } from './components/footer/footer.component';
     StoreModule.forRoot({ senw: reducer }),
     StoreDevtoolsModule.instrument(),
     HttpClientModule,
-    EffectsModule.forRoot([SenwEffects])
+    EffectsModule.forRoot([SenwEffects]),
+    FormsModule,
   ],
   providers: [SenwService, SignalRService],
   bootstrap: [AppComponent]

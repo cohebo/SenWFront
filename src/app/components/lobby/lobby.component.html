@@ -1,8 +1,11 @@
-<p>lobby works!</p>
-<div *ngFor="let group of groups">
-    <h1>{{ group.groupName }}</h1>
-</div>
+<div class="senw-container senw-theme-colors">
+    <app-header>
+    </app-header>
+    <main>
+        <p>lobby works!</p>
 
-<div *ngFor="let signalrGroups of groups$ | async">
-    <h1>{{ signalrGroups.groupName }}</h1>
+        <div *ngFor="let signalrGroups of groups$ | async">
+            <h4>{{ signalrGroups.groupName }}</h4>
+        </div>
+    </main>
 </div>

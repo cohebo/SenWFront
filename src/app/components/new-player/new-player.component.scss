@@ -1,0 +1,83 @@
+@use "../../general/styles/sens.scss";
+
+.new-player-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+  height: auto;
+  position: relative;
+  margin-top: 40px;
+}
+.image img {
+  width: 60%;
+  max-width: 100%;
+  height: auto;
+}
+
+.avatar-buttons i {
+  padding: 20px;
+}
+
+.filler {
+  margin-top: 50px;
+}
+
+.input-container {
+  width: 70%;
+  height: 40px;
+  padding: 10px;
+}
+
+.custom-input {
+  width: 100%;
+  height: 50px;
+  padding-left: 10px;
+  border: 1px solid #ccc;
+  font-family: sans-serif;
+  font-size: 32px;
+  letter-spacing: 5px;
+  color: #105059;
+  background-color: #d9d9d9;
+}
+
+.custom-input::placeholder {
+  color: #999;
+}
+
+.custom-input:focus {
+  outline: 1px solid #105059;
+}
+
+.filter-container {
+  margin: 40px;
+  display: flex;
+  flex-direction: row;
+}
+
+.range-slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 10px;
+}
+
+input[type="range"] {
+  width: 100px; /* Adjust width as needed */
+  margin-right: 10px; /* Add spacing between slider and output */
+}
+
+output {
+  font-size: 16px; /* Adjust font size as needed */
+}
+
+.filter-container i {
+  padding-left: 20px;
+  margin-top: 10px;
+}

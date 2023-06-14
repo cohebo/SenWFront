@@ -1,6 +1,6 @@
 import { State } from "../state/senw.state";
 import { createReducer, on } from "@ngrx/store";
-import { connectingSuccess, createGroupSuccess, startConnection } from "../actions/senw.actions";
+import { connectingSuccess, createGroupSuccess, getGroupsSuccess, startConnection } from "../actions/senw.actions";
 
 export const initialState: State = {
     groupName: "",
@@ -30,6 +30,13 @@ export const initialState: State = {
         ...state,
         groupName: "nieuw",
         groupId: "hellyeah!"
+      })
+    ),
+    on(
+      getGroupsSuccess,
+      (state, props): State => ({
+        ...state,
+        groups: props.model
       })
     ),
     on(

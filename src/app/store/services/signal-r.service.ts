@@ -7,6 +7,7 @@ import { map } from "rxjs/operators";
 import {
   CreateGroupModel,
   GroupCreatedModel,
+  GroupModel,
 } from "./signal-r.models";
 import { environment } from "src/environments/environment";
 import { connecting, connectingFailed, connectingSuccess, disconnected, reconnectingSuccess } from "../actions/senw.actions";
@@ -71,6 +72,25 @@ export class SignalRService {
           " or because running on server"
       );
     }
+  }
+
+  public getGroups(): Observable<Array<GroupModel>> {
+    const promise = this.hubConnection.invoke<Array<GroupModel>>(
+      "GetGroups"
+    );
+    this.addGroupEventListeners();
+    const observable = from(promise)
+      .pipe(
+        map((value) => {
+            return value;
+        })
+      )
+      .pipe(
+        map((apiModel) => {
+          return apiModel
+        })
+      );
+    return observable;
   }
 
   public createGroup(model: CreateGroupModel): Observable<GroupCreatedModel> {
