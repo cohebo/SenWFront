@@ -2,10 +2,18 @@
     <app-header>
     </app-header>
     <main>
-        <p>lobby works!</p>
-
-        <div *ngFor="let signalrGroups of groups$ | async">
-            <h4>{{ signalrGroups.groupName }}</h4>
+        <app-game-filters>
+        </app-game-filters>
+        
+        <div class="lobby-grouplist">
+            <div class="group" *ngFor="let signalrGroups of groups$ | async">
+                <h4>{{ signalrGroups.groupName }}</h4>
+            </div>
         </div>
+
+        
     </main>
+
+    <app-footer>
+    </app-footer>
 </div>

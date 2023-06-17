@@ -1,0 +1,14 @@
+.footer {
+
+    /* position: absolute; */
+    width: 361px;
+    height: 60px;
+    margin-top: 18px;
+    /* left: 44px;
+    top: 290px; */
+
+    background: rgba(217, 217, 217, 0.5);
+    mix-blend-mode: normal;
+    opacity: 0.6;
+
+}

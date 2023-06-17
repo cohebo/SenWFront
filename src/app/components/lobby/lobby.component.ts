@@ -33,5 +33,6 @@ export class LobbyComponent implements OnInit {
     setTimeout(() => {
       this.store.dispatch(createGroup(group));
     }, 5000);
+    console.log(group)
   }
 }
