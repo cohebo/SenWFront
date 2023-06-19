@@ -11,16 +11,24 @@ import { SenwService } from './service/senw.service';
 import { SenwEffects } from './store/effects/senw.effects';
 import { reducer } from './store/reducers/senw.reducer';
 import { SignalRService } from './store/services/signal-r.service';
-import { HeaderComponent } from './components/general/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LobbyComponent } from './components/lobby/lobby.component';
+import { GameFiltersComponent } from './components/lobby/game-filters/game-filters.component';
+import { GroupListComponent } from './components/lobby/group-list/group-list.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LobbyComponent,
     NewPlayerComponent,
-    HeaderComponent
+    HeaderComponent,
+    GameFiltersComponent,
+    GroupListComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
