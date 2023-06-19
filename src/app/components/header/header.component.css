@@ -1,0 +1,32 @@
+/* Header */
+
+.header {
+    box-sizing: border-box;
+
+    position: relative;
+    width: 273px;
+    left: 44px;
+
+    background: rgba(217, 217, 217, 0.17);
+    border-left: 4px solid rgba(98, 112, 147, 0.16);
+}
+
+/* GEOMESH */
+
+.header-text {
+    width: 273px;
+    height: 60px;
+    left: 44px;
+    top: 34px;
+
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 152.52%;
+    /* or 52px */
+    text-align: center;
+    letter-spacing: 0.34em;
+
+    color: #105059;
+}

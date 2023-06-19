@@ -1,0 +1,13 @@
+.game-filters {
+
+    /* position: absolute; */
+    width: 361px;
+    height: 152px;
+    /* left: 44px;
+    top: 290px; */
+
+    background: rgba(217, 217, 217, 0.5);
+    mix-blend-mode: normal;
+    opacity: 0.6;
+
+}
