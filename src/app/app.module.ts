@@ -6,13 +6,13 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LobbyComponent } from './components/lobby/lobby.component';
 import { NewPlayerComponent } from './components/new-player/new-player.component';
 import { SenwService } from './service/senw.service';
 import { SenwEffects } from './store/effects/senw.effects';
 import { reducer } from './store/reducers/senw.reducer';
 import { SignalRService } from './store/services/signal-r.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LobbyComponent } from './components/lobby/lobby.component';
 import { GameFiltersComponent } from './components/lobby/game-filters/game-filters.component';
 import { GroupListComponent } from './components/lobby/group-list/group-list.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -38,6 +38,7 @@ import { FooterComponent } from './components/footer/footer.component';
     HttpClientModule,
     EffectsModule.forRoot([SenwEffects]),
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [SenwService, SignalRService],
   bootstrap: [AppComponent]

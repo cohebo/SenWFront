@@ -2,18 +2,15 @@
     <app-header>
     </app-header>
     <main>
-        <app-game-filters>
-        </app-game-filters>
-        
-        <div class="lobby-grouplist">
-            <div class="group" *ngFor="let signalrGroups of groups$ | async">
-                <h4>{{ signalrGroups.groupName }}</h4>
-            </div>
+        <h1>lobby WIP</h1>
+
+        <form [formGroup]="newGroupForm" (ngSubmit)="createNewGroup()">
+            <input type="text" formControlName="newGroupName" placeholder="Group Name" />
+            <button type="submit">Create Group</button>
+        </form>
+
+        <div *ngFor="let signalrGroups of groups$ | async">
+            <h4>{{ signalrGroups.groupName }}</h4>
         </div>
-
-        
     </main>
-
-    <app-footer>
-    </app-footer>
 </div>
