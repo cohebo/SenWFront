@@ -9,8 +9,9 @@
             <button type="submit">Create Group</button>
         </form>
 
-        <div *ngFor="let signalrGroups of groups$ | async">
-            <h4>{{ signalrGroups.groupName }}</h4>
+        <div *ngFor="let group of groups$ | async">
+            <h4>{{ group.groupName }}</h4>
+            <button (click)="joinGroup(group.groupId)">Join</button>
         </div>
     </main>
 </div>

@@ -28,7 +28,7 @@ import { FooterComponent } from './components/footer/footer.component';
     GameFiltersComponent,
     GroupListComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +41,7 @@ import { FooterComponent } from './components/footer/footer.component';
     ReactiveFormsModule,
   ],
   providers: [SenwService, SignalRService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 
 export class AppModule {

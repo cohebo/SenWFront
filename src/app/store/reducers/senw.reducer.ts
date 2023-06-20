@@ -1,6 +1,6 @@
 import { State } from "../state/senw.state";
 import { createReducer, on } from "@ngrx/store";
-import { connectingSuccess, createGroupSuccess, getGroupsSuccess, startConnection } from "../actions/senw.actions";
+import { connectingSuccess, createGroupSuccess, getGroupsSuccess } from "../actions/senw.actions";
 
 export const initialState: State = {
     groupName: "",
@@ -19,8 +19,18 @@ export const initialState: State = {
       playedGames: null,
       players: null,
       groupLeader: null,
-    }
-  ],
+      }
+    ],
+    groupLeaderId: "",
+    player: {
+      playerId: "",
+      playerName: "",
+      Avatar: "",
+      Wins: 0,
+      Loses: 0,
+      Draws: 0,
+    },
+    groupPlayers: [],
   };
   export const reducer = createReducer(
     initialState,

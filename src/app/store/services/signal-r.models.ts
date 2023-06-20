@@ -17,3 +17,12 @@ export interface GroupModel {
   players: null,
   groupLeader: null,
 }
+
+export interface PlayerModel {
+  playerId: string,
+  playerName: string,
+  Avatar: string,
+  Wins: number,
+  Loses: number,
+  Draws: number,
+}
