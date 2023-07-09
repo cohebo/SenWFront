@@ -8,6 +8,8 @@ import {
   CreateGroupModel,
   GroupCreatedModel,
   GroupModel,
+  CreatePlayerModel,
+  PlayerCreatedModel
 } from "./signal-r.models";
 import { environment } from "src/environments/environment";
 import { connecting, connectingFailed, connectingSuccess, disconnected, reconnectingSuccess } from "../actions/senw.actions";
@@ -110,6 +112,29 @@ export class SignalRService {
           return {
             groupId: apiModel.groupId,
             groupName: apiModel.groupName,
+          };
+        })
+      );
+    return observable;
+  }
+
+  public createPlayer(model: CreatePlayerModel): Observable<PlayerCreatedModel> {
+    const promise = this.hubConnection.invoke<PlayerCreatedModel>(
+      "CreatePlayer",
+      model.playerName
+    );
+    this.addGroupEventListeners();
+    const observable = from(promise)
+      .pipe(
+        map((value) => {
+            return value;
+        })
+      )
+      .pipe(
+        map((apiModel) => {
+          return {
+            playerId: apiModel.playerId,
+            playerName: apiModel.playerName,
           };
         })
       );

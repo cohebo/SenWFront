@@ -1,10 +1,13 @@
 import { State } from "../state/senw.state";
 import { createReducer, on } from "@ngrx/store";
-import { connectingSuccess, createGroupSuccess, getGroupsSuccess, startConnection } from "../actions/senw.actions";
+import { connectingSuccess, createGroupSuccess, getGroupsSuccess, startConnection,
+         createPlayerSuccess } from "../actions/senw.actions";
 
 export const initialState: State = {
     groupName: "",
     groupId: "",
+    playerName: "",
+    playerId: "",
     groups: [{
       groupId: "groupId12345",
       groupName: "supercoolenaam",
@@ -20,7 +23,12 @@ export const initialState: State = {
       players: null,
       groupLeader: null,
     }
-  ],
+    ],
+    player: [{
+      playerId: "GUI-D-340934-DICK",
+      playerName: "McPiemel"
+    }]
+
   };
   export const reducer = createReducer(
     initialState,
@@ -53,6 +61,14 @@ export const initialState: State = {
             groupLeader: null,
           },
         ]),
+      })
+    ),
+    on(
+      createPlayerSuccess,
+      (state, props): State => ({
+        ...state,
+        playerId: props.model.playerId,
+        playerName: props.model.playerName
       })
     ),
   );
