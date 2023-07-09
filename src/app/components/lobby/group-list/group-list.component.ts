@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 
 @Component({
   selector: 'app-group-list',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./group-list.component.css']
 })
 export class GroupListComponent {
+//@Inject groups: Group;
 
 }
