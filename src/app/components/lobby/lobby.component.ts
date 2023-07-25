@@ -28,6 +28,7 @@ export class LobbyComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(startConnection());
     // Wait for 2 seconds before dispatching getGroups()
+    // Move to effect, is better solution
     setTimeout(() => {
       this.store.dispatch(getGroups());
     }, 2000);
@@ -42,4 +43,8 @@ export class LobbyComponent implements OnInit {
     }
   }
 
+  //whatsathissa?
+  joinGroup(groupId: string) {
+    console.log("joinnn ", groupId);
+  }
 }

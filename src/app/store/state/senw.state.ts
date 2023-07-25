@@ -7,9 +7,12 @@ export interface State {
     groupName: string;
     groupId: string;
     groups: Array<Group>,
+    groupLeaderId: string;
+    groupPlayers: Array<Player>;
     playerName: string;
     playerId: string;
-    player: Array<Player>,
-    locationX: number,
-    locationY: number,
+//player nodig?
+    player: Player;
+    locationX: number;
+    locationY: number;
 }

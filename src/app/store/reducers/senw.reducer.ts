@@ -3,6 +3,7 @@ import { createReducer, on } from "@ngrx/store";
 import { connectingSuccess, createGroupSuccess, getGroupsSuccess, startConnection,
          createPlayerSuccess } from "../actions/senw.actions";
 
+
 export const initialState: State = {
     groupName: "",
     groupId: "",
@@ -24,15 +25,18 @@ export const initialState: State = {
       playedGames: null,
       players: null,
       groupLeader: null,
-    }
-    ],
+
     player: [{
       playerId: "GUI-D-340934-DICK",
       playerName: "McPiemel",
       locationX: 0,
-      locationY: 0
-    }]
-
+      locationY: 0,
+      Avatar: "",
+      Wins: 0,
+      Loses: 0,
+      Draws: 0,
+    }],
+    groupPlayers: [],
   };
   export const reducer = createReducer(
     initialState,

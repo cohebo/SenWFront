@@ -36,6 +36,7 @@ export interface PlayerCreatedModel {
 }
 
 // loses veranderen in losses
+//deze model of die hierboven.. merge dingetje
 
 export interface PlayerModel {
   playerId: string,
@@ -46,4 +47,13 @@ export interface PlayerModel {
   draws: null,
   locationX: number,
   locationY: number,
+
+export interface PlayerModel {
+  playerId: string,
+  playerName: string,
+  Avatar: string,
+  Wins: number,
+  Loses: number,
+  Draws: number,
+
 }
