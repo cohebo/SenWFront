@@ -5,39 +5,33 @@ import { connectingSuccess, createGroupSuccess, getGroupsSuccess, startConnectio
 
 
 export const initialState: State = {
-    groupName: "",
-    groupId: "",
-    playerName: "",
-    playerId: "",
+  groupName: "",
+  groupId: "",
+  playerName: "",
+  playerId: "",
+  locationX: 0,
+  locationY: 0,
+  groups: [{
+    groupId: "groupId12345",
+    groupName: "supercoolenaam",
+    gameLobby: null,
+    playedGames: null,
+    players: null,
+    groupLeader: null
+  }],
+  player: {
+    playerId: "GUI-D-340934-DICK",
+    playerName: "McPiemel",
     locationX: 0,
     locationY: 0,
-    groups: [{
-      groupId: "groupId12345",
-      groupName: "supercoolenaam",
-      gameLobby: null,
-      playedGames: null,
-      players: null,
-      groupLeader: null,
-    },{
-      groupId: "IDf38f-43f43fes-ss",
-      groupName: "naampjeHoor",
-      gameLobby: null,
-      playedGames: null,
-      players: null,
-      groupLeader: null,
-
-    player: [{
-      playerId: "GUI-D-340934-DICK",
-      playerName: "McPiemel",
-      locationX: 0,
-      locationY: 0,
-      Avatar: "",
-      Wins: 0,
-      Loses: 0,
-      Draws: 0,
-    }],
-    groupPlayers: [],
-  };
+    Avatar: "",
+    Wins: 0,
+    Loses: 0,
+    Draws: 0
+  },
+  groupPlayers: [],
+  groupLeaderId: ""
+};
   export const reducer = createReducer(
     initialState,
     on(

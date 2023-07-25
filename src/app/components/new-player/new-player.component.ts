@@ -23,7 +23,7 @@ export class NewPlayerComponent implements OnInit {
     this.sliderValue = Number(event.target.value);
   }
 
-  player$: Observable<Array<Player>> = this.store.select(
+  player$: Observable<Player> = this.store.select(
     selectPlayer
   );
   newPlayerForm: FormGroup;

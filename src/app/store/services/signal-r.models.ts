@@ -47,13 +47,4 @@ export interface PlayerModel {
   draws: null,
   locationX: number,
   locationY: number,
-
-export interface PlayerModel {
-  playerId: string,
-  playerName: string,
-  Avatar: string,
-  Wins: number,
-  Loses: number,
-  Draws: number,
-
 }
