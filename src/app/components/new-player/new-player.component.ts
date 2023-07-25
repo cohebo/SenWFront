@@ -38,9 +38,6 @@ export class NewPlayerComponent implements OnInit {
     this.store.dispatch(startConnection());
   }
 
-
-  // Werkt nog niet - nogal wiedes
-
   getLongAndLat() {
     return new Promise((resolve, reject) =>
         navigator.geolocation.getCurrentPosition(resolve, reject)
@@ -52,6 +49,7 @@ export class NewPlayerComponent implements OnInit {
         const position = await this.getLongAndLat() as GeolocationPosition;
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
+        this.createNewPlayer();
         console.log(this.longitude, this.latitude);
         } 
     catch (error) {
@@ -61,8 +59,6 @@ export class NewPlayerComponent implements OnInit {
 
   createNewPlayer() {
     if (this.newPlayerForm.valid) {
-
-      this.getLocation();
 
       const player: CreatePlayerModel = {
         playerName: this.newPlayerForm.value.newPlayerName,

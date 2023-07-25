@@ -11,7 +11,7 @@
         </div>
         <div class="filler"></div>
         <div class="input-container">
-            <form [formGroup]="newPlayerForm" (ngSubmit)="createNewPlayer()">
+            <form [formGroup]="newPlayerForm" (ngSubmit)="getLocation()">
                 <input type="text" formControlName="newPlayerName" placeholder="Insert Name..." />
                 <button type="submit">Create Player</button>
             </form>
