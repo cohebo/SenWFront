@@ -1,5 +1,7 @@
 import { Group } from "src/app/models/group";
 
+// GroupModel
+
 export interface CreateGroupModel {
     groupName: string;
   }
@@ -16,4 +18,32 @@ export interface GroupModel {
   playedGames: null,
   players: null,
   groupLeader: null,
+}
+
+// PlayerModel
+
+export interface CreatePlayerModel {
+  playerName: string,
+  locationX: number,
+  locationY: number,
+}
+
+export interface PlayerCreatedModel {
+  playerId: string,
+  playerName: string,
+  locationX: number,
+  locationY: number,
+}
+
+// loses veranderen in losses
+
+export interface PlayerModel {
+  playerId: string,
+  playerName: string,
+  gamesPlayed: null,
+  wins: null,
+  loses: null,
+  draws: null,
+  locationX: number,
+  locationY: number,
 }

@@ -9,3 +9,10 @@ export const selectGroups = createSelector(
         return state.groups;
       }
 );
+
+export const selectPlayer = createSelector(
+  selectSenwState,
+  (state: State) => {
+      return state.player;
+    }
+);
