@@ -121,7 +121,9 @@ export class SignalRService {
   public createPlayer(model: CreatePlayerModel): Observable<PlayerCreatedModel> {
     const promise = this.hubConnection.invoke<PlayerCreatedModel>(
       "CreatePlayer",
-      model.playerName
+      model.playerName,
+      model.locationX,
+      model.locationY
     );
     this.addGroupEventListeners();
     const observable = from(promise)
@@ -135,6 +137,8 @@ export class SignalRService {
           return {
             playerId: apiModel.playerId,
             playerName: apiModel.playerName,
+            locationX: apiModel.locationX,
+            locationY: apiModel.locationY,
           };
         })
       );

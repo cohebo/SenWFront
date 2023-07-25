@@ -10,4 +10,6 @@ export interface State {
     playerName: string;
     playerId: string;
     player: Array<Player>,
+    locationX: number,
+    locationY: number,
 }

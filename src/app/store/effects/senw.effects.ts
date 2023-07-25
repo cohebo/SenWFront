@@ -81,6 +81,8 @@ export class SenwEffects {
         this.signalRService
           .createPlayer({
             playerName: model.playerName,
+            locationX: model.locationX,
+            locationY: model.locationY,
           })
           .pipe(
             map((playerCreatedModel) =>
@@ -88,6 +90,8 @@ export class SenwEffects {
                 model: {
                   playerId: playerCreatedModel.playerId,
                   playerName: playerCreatedModel.playerName,
+                  locationX: playerCreatedModel.locationX,
+                  locationY: playerCreatedModel.locationY,
                 },
               })
             ),

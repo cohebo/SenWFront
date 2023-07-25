@@ -23,12 +23,16 @@ export interface GroupModel {
 // PlayerModel
 
 export interface CreatePlayerModel {
-  playerName: string;
+  playerName: string,
+  locationX: number,
+  locationY: number,
 }
 
 export interface PlayerCreatedModel {
-  playerId: string;
-  playerName: string;
+  playerId: string,
+  playerName: string,
+  locationX: number,
+  locationY: number,
 }
 
 // loses veranderen in losses
@@ -40,5 +44,6 @@ export interface PlayerModel {
   wins: null,
   loses: null,
   draws: null,
-  recentLocation: null,
+  locationX: number,
+  locationY: number,
 }

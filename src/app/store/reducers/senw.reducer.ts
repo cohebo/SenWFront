@@ -8,6 +8,8 @@ export const initialState: State = {
     groupId: "",
     playerName: "",
     playerId: "",
+    locationX: 0,
+    locationY: 0,
     groups: [{
       groupId: "groupId12345",
       groupName: "supercoolenaam",
@@ -26,7 +28,9 @@ export const initialState: State = {
     ],
     player: [{
       playerId: "GUI-D-340934-DICK",
-      playerName: "McPiemel"
+      playerName: "McPiemel",
+      locationX: 0,
+      locationY: 0
     }]
 
   };
@@ -68,7 +72,9 @@ export const initialState: State = {
       (state, props): State => ({
         ...state,
         playerId: props.model.playerId,
-        playerName: props.model.playerName
+        playerName: props.model.playerName,
+        locationX: props.model.locationX,
+        locationY: props.model.locationY,
       })
     ),
   );
