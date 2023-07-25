@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { map, mergeMap, tap, withLatestFrom } from "rxjs";
-import { connectingSuccess, createGroup, createGroupSuccess, getGroups, getGroupsSuccess, startConnection } from "../actions/senw.actions";
+import { connectingSuccess, createGroup, createGroupSuccess, getGroups, getGroupsSuccess, createPlayer, createPlayerSuccess, startConnection } from "../actions/senw.actions";
 import { selectSenwState } from "../selectors/senw.selectors";
 import { SignalRService } from "../services/signal-r.service";
 
@@ -72,4 +72,33 @@ export class SenwEffects {
       )
     );
   });
+
+  createPlayer$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(createPlayer),
+      withLatestFrom(this.store.select(selectSenwState)),
+      mergeMap(([model]) =>
+        this.signalRService
+          .createPlayer({
+            playerName: model.playerName,
+            locationX: model.locationX,
+            locationY: model.locationY,
+          })
+          .pipe(
+            map((playerCreatedModel) =>
+              createPlayerSuccess({
+                model: {
+                  playerId: playerCreatedModel.playerId,
+                  playerName: playerCreatedModel.playerName,
+                  locationX: playerCreatedModel.locationX,
+                  locationY: playerCreatedModel.locationY,
+                },
+              })
+            ),
+            //catchError((error) => of(createGroepError({ e: error })))
+          )
+      )
+    );
+  });
+
 }

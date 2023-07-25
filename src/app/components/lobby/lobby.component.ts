@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Group } from 'src/app/models/group';
 import { createGroup, getGroups, startConnection } from 'src/app/store/actions/senw.actions';
-import { selectGroups } from 'src/app/store/selectors/senw.selectors';
+import { selectGroups,  selectPlayer } from 'src/app/store/selectors/senw.selectors';
 import { CreateGroupModel } from 'src/app/store/services/signal-r.models';
 
 @Component({
@@ -43,6 +43,7 @@ export class LobbyComponent implements OnInit {
     }
   }
 
+  //whatsathissa?
   joinGroup(groupId: string) {
     console.log("joinnn ", groupId);
   }
