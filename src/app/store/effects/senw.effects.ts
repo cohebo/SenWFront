@@ -57,6 +57,7 @@ export class SenwEffects {
         this.signalRService
           .createGroup({
             groupName: model.groupName,
+            playerId: model.playerId,
           })
           .pipe(
             map((groupCreatedModel) =>
@@ -64,6 +65,8 @@ export class SenwEffects {
                 model: {
                   groupId: groupCreatedModel.groupId,
                   groupName: groupCreatedModel.groupName,
+                  players: groupCreatedModel.players,
+                  groupLeaderId: groupCreatedModel.groupLeaderId,
                 },
               })
             ),

@@ -17,6 +17,7 @@ import { GameFiltersComponent } from './components/lobby/game-filters/game-filte
 import { GroupListComponent } from './components/lobby/group-list/group-list.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { GameLobbyComponent } from './components/game-lobby/game-lobby.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { FooterComponent } from './components/footer/footer.component';
     GroupListComponent,
     HeaderComponent,
     FooterComponent,
+    GameLobbyComponent,
   ],
   imports: [
     BrowserModule,

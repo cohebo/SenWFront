@@ -34,7 +34,7 @@ export const getGroupsSuccess = createAction(
 
 export const createGroup = createAction(
     "[SenW] Create group",
-    props<{groupName: string}>()
+    props<{groupName: string, playerId: string}>()
 );
 
 export const createGroupSuccess = createAction(

@@ -17,7 +17,7 @@ export const initialState: State = {
     gameLobby: null,
     playedGames: null,
     players: null,
-    groupLeader: null
+    groupLeaderId: ""
   }],
   player: {
     playerId: "GUI-D-340934-DICK",
@@ -29,7 +29,7 @@ export const initialState: State = {
     Loses: 0,
     Draws: 0
   },
-  groupPlayers: [],
+  players: [],
   groupLeaderId: ""
 };
   export const reducer = createReducer(
@@ -59,10 +59,14 @@ export const initialState: State = {
             groupName: props.model.groupName,
             gameLobby: null,
             playedGames: null,
-            players: null,
-            groupLeader: null,
+            players: props.model.players,
+            groupLeaderId: props.model.groupLeaderId,
           },
         ]),
+        groupId: props.model.groupId,
+        groupName: props.model.groupName,
+        players: props.model.players,
+        groupLeaderId: props.model.groupLeaderId,
       })
     ),
     on(

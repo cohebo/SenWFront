@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Player } from 'src/app/models/player';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { createPlayer, startConnection } from 'src/app/store/actions/senw.actions';
-import { selectPlayer } from 'src/app/store/selectors/senw.selectors';
 import { CreatePlayerModel } from 'src/app/store/services/signal-r.models';
 
 @Component({
@@ -23,9 +20,6 @@ export class NewPlayerComponent implements OnInit {
     this.sliderValue = Number(event.target.value);
   }
 
-  player$: Observable<Player> = this.store.select(
-    selectPlayer
-  );
   newPlayerForm: FormGroup;
   
   constructor(private store: Store, private formBuilder: FormBuilder) {
@@ -67,7 +61,5 @@ export class NewPlayerComponent implements OnInit {
       };
       this.store.dispatch(createPlayer(player));
     }
-
-
   }
 }

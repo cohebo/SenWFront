@@ -98,7 +98,8 @@ export class SignalRService {
   public createGroup(model: CreateGroupModel): Observable<GroupCreatedModel> {
     const promise = this.hubConnection.invoke<GroupCreatedModel>(
       "CreateGroup",
-      model.groupName
+      model.groupName,
+      model.playerId
     );
     this.addGroupEventListeners();
     const observable = from(promise)
@@ -112,6 +113,8 @@ export class SignalRService {
           return {
             groupId: apiModel.groupId,
             groupName: apiModel.groupName,
+            players: apiModel.players,
+            groupLeaderId: apiModel.groupLeaderId,
           };
         })
       );

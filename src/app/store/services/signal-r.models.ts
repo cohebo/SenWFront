@@ -4,11 +4,14 @@ import { Group } from "src/app/models/group";
 
 export interface CreateGroupModel {
     groupName: string;
+    playerId: string;
   }
 
 export interface GroupCreatedModel {
     groupId: string;
     groupName: string;
+    players: Array<PlayerModel>
+    groupLeaderId: string;
 }
 
 export interface GroupModel {
@@ -16,8 +19,8 @@ export interface GroupModel {
   groupName: string,
   gameLobby: null,
   playedGames: null,
-  players: null,
-  groupLeader: null,
+  players: Array<PlayerModel>,
+  groupLeaderId: string,
 }
 
 // PlayerModel
@@ -41,10 +44,10 @@ export interface PlayerCreatedModel {
 export interface PlayerModel {
   playerId: string,
   playerName: string,
-  gamesPlayed: null,
-  wins: null,
-  loses: null,
-  draws: null,
+  // gamesPlayed: null,
+  // wins: null,
+  // loses: null,
+  // draws: null,
   locationX: number,
   locationY: number,
 }
