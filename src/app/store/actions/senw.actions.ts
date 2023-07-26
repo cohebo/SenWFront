@@ -1,7 +1,7 @@
 // connections
 
 import { createAction, props } from "@ngrx/store";
-import { GroupCreatedModel, GroupJoinedModel, GroupModel, PlayerCreatedModel } from "../services/signal-r.models";
+import { GameCreatedModel, GroupCreatedModel, GroupJoinedModel, GroupModel, PlayerCreatedModel, UselessBoxProgressModel } from "../services/signal-r.models";
 
 export const startConnection = createAction(
     "[SenW Connection] Start connection"
@@ -78,18 +78,19 @@ export const startUselessBox = createAction(
 export const startUselessBoxSuccess = createAction(
     "[SenW] Start uselessbox game success",
     props<{
-        model: any;
+        model: GameCreatedModel;
       }>()
 );
 
 export const uselessBoxNextRound = createAction(
-    "[SenW] UselessBox next round"
+    "[SenW] UselessBox next round",
+    props<{groupId: string, gameId: number}>()
 );
 
 export const uselessBoxNextRoundSuccess = createAction(
     "[SenW] UselessBox next round",
     props<{
-        model: any;
+        model: UselessBoxProgressModel;
       }>()
 );
 

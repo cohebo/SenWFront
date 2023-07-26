@@ -65,3 +65,23 @@ export const selectGameLobby = createSelector(
       return state.gamelobby;
     }
 );
+//
+
+export const selectGameId = createSelector(
+  selectSenwState,
+  (state: State) => {
+      return state.gamelobby.game?.gameId;
+    }
+);
+export const selectUselessBoxState = createSelector(
+  selectSenwState,
+  (state: State) => {
+      return state.gamelobby.game?.state;
+    }
+);
+export const selectUselessBoxCount = createSelector(
+  selectSenwState,
+  (state: State) => {
+      return state.gamelobby.game?.count;
+    }
+);

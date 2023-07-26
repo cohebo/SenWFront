@@ -12,10 +12,13 @@ import {
   PlayerCreatedModel,
   JoinGroupModel,
   GroupJoinedModel,
-  CreateGameModel
+  CreateGameModel,
+  GameCreatedModel,
+  UselessBoxProgressModel,
+  UselessBoxMakeProgressModel
 } from "./signal-r.models";
 import { environment } from "src/environments/environment";
-import { connecting, connectingFailed, connectingSuccess, disconnected, joinGroupSuccess, reconnectingSuccess, startUselessBoxSuccess } from "../actions/senw.actions";
+import { connecting, connectingFailed, connectingSuccess, disconnected, joinGroupSuccess, reconnectingSuccess, startUselessBoxSuccess, uselessBoxNextRoundSuccess } from "../actions/senw.actions";
 import { Router } from "@angular/router";
 
 @Injectable({
@@ -178,8 +181,8 @@ export class SignalRService {
     return observable;
   }
 
-  public createGame(model: CreateGameModel): Observable<any> {
-    const promise = this.hubConnection.invoke<AnalyserNode>(
+  public createGame(model: CreateGameModel): Observable<GameCreatedModel> {
+    const promise = this.hubConnection.invoke<GameCreatedModel>(
       "CreateGame",
       model.gameName,
       model.groupId,
@@ -194,7 +197,34 @@ export class SignalRService {
       .pipe(
         map((apiModel) => {
           return {
-            apiModel
+            name: apiModel.name,
+            players: apiModel.players,
+            game: apiModel.game,
+            active: apiModel.active,
+          };
+        })
+      );
+    return observable;
+  }
+
+  public uselessBoxProgress(model: UselessBoxMakeProgressModel): Observable<UselessBoxProgressModel> {
+    const promise = this.hubConnection.invoke<UselessBoxProgressModel>(
+      "NextRoundUselessBox",
+      model.groupId,
+      model.gameId,
+    );
+    //this.addGroupEventListeners();
+    const observable = from(promise)
+      .pipe(
+        map((value) => {
+            return value;
+        })
+      )
+      .pipe(
+        map((apiModel) => {
+          return {
+            state: apiModel.state,
+            count: apiModel.count,
           };
         })
       );
@@ -209,9 +239,13 @@ export class SignalRService {
       this.store.dispatch(joinGroupSuccess({ model: data }));
     });
 
-    this.hubConnection.on("gameStarted", (data: any) => {
+    this.hubConnection.on("gameStarted", (data: GameCreatedModel) => {
       this.store.dispatch(startUselessBoxSuccess({ model: data }));
       this.router.navigate(['/uselessbox']);
+    });
+
+    this.hubConnection.on("uselessboxProgress", (data: UselessBoxProgressModel) => {
+      this.store.dispatch(uselessBoxNextRoundSuccess({ model: data }));
     });
   };
 
