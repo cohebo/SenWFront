@@ -14,7 +14,7 @@ import {
   GroupJoinedModel
 } from "./signal-r.models";
 import { environment } from "src/environments/environment";
-import { connecting, connectingFailed, connectingSuccess, disconnected, reconnectingSuccess } from "../actions/senw.actions";
+import { connecting, connectingFailed, connectingSuccess, disconnected, joinGroupSuccess, reconnectingSuccess } from "../actions/senw.actions";
 
 @Injectable({
   providedIn: "root",
@@ -82,7 +82,7 @@ export class SignalRService {
     const promise = this.hubConnection.invoke<Array<GroupModel>>(
       "GetGroups"
     );
-    this.addGroupEventListeners();
+    //this.addGroupEventListeners();
     const observable = from(promise)
       .pipe(
         map((value) => {
@@ -103,7 +103,7 @@ export class SignalRService {
       model.groupName,
       model.playerId
     );
-    this.addGroupEventListeners();
+    //this.addGroupEventListeners();
     const observable = from(promise)
       .pipe(
         map((value) => {
@@ -156,7 +156,7 @@ export class SignalRService {
       model.groupId,
       model.playerId
     );
-    this.addGroupEventListeners();
+    //this.addGroupEventListeners();
     const observable = from(promise)
       .pipe(
         map((value) => {
@@ -178,10 +178,12 @@ export class SignalRService {
 
 //   // Listen to group events
   public addGroupEventListeners = () => {
+    console.log("activated");
     // These actions do not need a success and error action as the result has already succeeded in the backend
-    // this.hubConnection.on("test", (data: Test) => {
-    //   this.store.dispatch(test({ model: data }));
-    // });
+    this.hubConnection.on("groupJoined", (data: GroupJoinedModel) => {
+      console.log("yoyo event listner yo");
+      this.store.dispatch(joinGroupSuccess({ model: data }));
+    });
   };
 
   public stopConnection(): void {
@@ -190,6 +192,6 @@ export class SignalRService {
   }
 
   public removeGroupEventListeners = () => {
-     //this.hubConnection.off("test");
+     this.hubConnection.off("groupJoined");
   };
 }
