@@ -10,9 +10,24 @@ export const selectGroups = createSelector(
       }
 );
 
-export const selectPlayer = createSelector(
+export const selectPlayerId = createSelector(
   selectSenwState,
   (state: State) => {
-      return state.player;
+      return state.playerId;
+    }
+);
+
+//
+export const selectPlayers = createSelector(
+  selectSenwState,
+  (state: State) => {
+      return state.players;
+    }
+);
+
+export const selectGroupName = createSelector(
+  selectSenwState,
+  (state: State) => {
+      return state.groupName;
     }
 );

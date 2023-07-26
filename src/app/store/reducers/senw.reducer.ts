@@ -1,7 +1,8 @@
 import { State } from "../state/senw.state";
 import { createReducer, on } from "@ngrx/store";
 import { connectingSuccess, createGroupSuccess, getGroupsSuccess, startConnection,
-         createPlayerSuccess } from "../actions/senw.actions";
+         createPlayerSuccess, 
+         joinGroupSuccess} from "../actions/senw.actions";
 
 
 export const initialState: State = {
@@ -17,7 +18,7 @@ export const initialState: State = {
     gameLobby: null,
     playedGames: null,
     players: null,
-    groupLeader: null
+    groupLeaderId: ""
   }],
   player: {
     playerId: "GUI-D-340934-DICK",
@@ -29,7 +30,7 @@ export const initialState: State = {
     Loses: 0,
     Draws: 0
   },
-  groupPlayers: [],
+  players: [],
   groupLeaderId: ""
 };
   export const reducer = createReducer(
@@ -59,10 +60,14 @@ export const initialState: State = {
             groupName: props.model.groupName,
             gameLobby: null,
             playedGames: null,
-            players: null,
-            groupLeader: null,
+            players: props.model.players,
+            groupLeaderId: props.model.groupLeaderId,
           },
         ]),
+        groupId: props.model.groupId,
+        groupName: props.model.groupName,
+        players: props.model.players,
+        groupLeaderId: props.model.groupLeaderId,
       })
     ),
     on(
@@ -73,6 +78,16 @@ export const initialState: State = {
         playerName: props.model.playerName,
         locationX: props.model.locationX,
         locationY: props.model.locationY,
+      })
+    ),
+    on(
+      joinGroupSuccess,
+      (state, props): State => ({
+        ...state,
+        groupId: props.model.groupId,
+        groupName: props.model.groupName,
+        players: props.model.players,
+        groupLeaderId: props.model.groupLeaderId,
       })
     ),
   );

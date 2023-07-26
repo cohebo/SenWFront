@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { map, mergeMap, tap, withLatestFrom } from "rxjs";
-import { connectingSuccess, createGroup, createGroupSuccess, getGroups, getGroupsSuccess, createPlayer, createPlayerSuccess, startConnection } from "../actions/senw.actions";
+import { connectingSuccess, createGroup, createGroupSuccess, getGroups, getGroupsSuccess, createPlayer, createPlayerSuccess, startConnection, joinGroupSuccess, joinGroup } from "../actions/senw.actions";
 import { selectSenwState } from "../selectors/senw.selectors";
 import { SignalRService } from "../services/signal-r.service";
 
@@ -57,6 +57,7 @@ export class SenwEffects {
         this.signalRService
           .createGroup({
             groupName: model.groupName,
+            playerId: model.playerId,
           })
           .pipe(
             map((groupCreatedModel) =>
@@ -64,6 +65,8 @@ export class SenwEffects {
                 model: {
                   groupId: groupCreatedModel.groupId,
                   groupName: groupCreatedModel.groupName,
+                  players: groupCreatedModel.players,
+                  groupLeaderId: groupCreatedModel.groupLeaderId,
                 },
               })
             ),
@@ -100,5 +103,30 @@ export class SenwEffects {
       )
     );
   });
-
+  joinGroup$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(joinGroup),
+      withLatestFrom(this.store.select(selectSenwState)),
+      mergeMap(([model]) =>
+        this.signalRService
+          .joinGroup({
+            groupId: model.groupId,
+            playerId: model.playerId,
+          })
+          .pipe(
+            map((joinGroupModel) =>
+            joinGroupSuccess({
+                model: {
+                  groupId: joinGroupModel.groupId,
+                  groupName: joinGroupModel.groupName,
+                  players: joinGroupModel.players,
+                  groupLeaderId: joinGroupModel.groupLeaderId,
+                },
+              })
+            ),
+            //catchError((error) => of(createGroepError({ e: error })))
+          )
+      )
+    );
+  });
 }

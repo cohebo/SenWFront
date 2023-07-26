@@ -9,7 +9,9 @@ import {
   GroupCreatedModel,
   GroupModel,
   CreatePlayerModel,
-  PlayerCreatedModel
+  PlayerCreatedModel,
+  JoinGroupModel,
+  GroupJoinedModel
 } from "./signal-r.models";
 import { environment } from "src/environments/environment";
 import { connecting, connectingFailed, connectingSuccess, disconnected, reconnectingSuccess } from "../actions/senw.actions";
@@ -98,7 +100,8 @@ export class SignalRService {
   public createGroup(model: CreateGroupModel): Observable<GroupCreatedModel> {
     const promise = this.hubConnection.invoke<GroupCreatedModel>(
       "CreateGroup",
-      model.groupName
+      model.groupName,
+      model.playerId
     );
     this.addGroupEventListeners();
     const observable = from(promise)
@@ -112,6 +115,8 @@ export class SignalRService {
           return {
             groupId: apiModel.groupId,
             groupName: apiModel.groupName,
+            players: apiModel.players,
+            groupLeaderId: apiModel.groupLeaderId,
           };
         })
       );
@@ -145,7 +150,31 @@ export class SignalRService {
     return observable;
   }
 
- 
+  public joinGroup(model: JoinGroupModel): Observable<GroupJoinedModel> {
+    const promise = this.hubConnection.invoke<GroupJoinedModel>(
+      "JoinGroup",
+      model.groupId,
+      model.playerId
+    );
+    this.addGroupEventListeners();
+    const observable = from(promise)
+      .pipe(
+        map((value) => {
+            return value;
+        })
+      )
+      .pipe(
+        map((apiModel) => {
+          return {
+            groupId: apiModel.groupId,
+            groupName: apiModel.groupName,
+            players: apiModel.players,
+            groupLeaderId: apiModel.groupLeaderId,
+          };
+        })
+      );
+    return observable;
+  }
 
 //   // Listen to group events
   public addGroupEventListeners = () => {

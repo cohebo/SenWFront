@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { GameLobbyComponent } from './components/game-lobby/game-lobby.component';
 import { LobbyComponent } from './components/lobby/lobby.component';
 import { NewPlayerComponent } from './components/new-player/new-player.component';
 
@@ -7,13 +8,19 @@ const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
+    component: NewPlayerComponent,
+    data: { state: "senw" },
+  },
+  {
+    path: "lobby",
+    pathMatch: "full",
     component: LobbyComponent,
     data: { state: "senw" },
   },
   {
-    path: "new",
+    path: "gamelobby",
     pathMatch: "full",
-    component: NewPlayerComponent,
+    component: GameLobbyComponent,
     data: { state: "senw" },
   },
 ];
