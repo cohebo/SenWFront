@@ -51,3 +51,15 @@ export interface PlayerModel {
   locationX: number,
   locationY: number,
 }
+
+export interface JoinGroupModel {
+  groupId: string;
+  playerId: string;
+}
+
+export interface GroupJoinedModel {
+  groupId: string;
+  groupName: string;
+  players: Array<PlayerModel>
+  groupLeaderId: string;
+}

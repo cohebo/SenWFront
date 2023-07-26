@@ -1,7 +1,8 @@
 import { State } from "../state/senw.state";
 import { createReducer, on } from "@ngrx/store";
 import { connectingSuccess, createGroupSuccess, getGroupsSuccess, startConnection,
-         createPlayerSuccess } from "../actions/senw.actions";
+         createPlayerSuccess, 
+         joinGroupSuccess} from "../actions/senw.actions";
 
 
 export const initialState: State = {
@@ -77,6 +78,16 @@ export const initialState: State = {
         playerName: props.model.playerName,
         locationX: props.model.locationX,
         locationY: props.model.locationY,
+      })
+    ),
+    on(
+      joinGroupSuccess,
+      (state, props): State => ({
+        ...state,
+        groupId: props.model.groupId,
+        groupName: props.model.groupName,
+        players: props.model.players,
+        groupLeaderId: props.model.groupLeaderId,
       })
     ),
   );

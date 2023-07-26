@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Group } from 'src/app/models/group';
-import { createGroup, getGroups, startConnection } from 'src/app/store/actions/senw.actions';
+import { createGroup, getGroups, joinGroup, startConnection } from 'src/app/store/actions/senw.actions';
 import { selectGroups, selectPlayerId } from 'src/app/store/selectors/senw.selectors';
-import { CreateGroupModel } from 'src/app/store/services/signal-r.models';
+import { CreateGroupModel, JoinGroupModel } from 'src/app/store/services/signal-r.models';
 
 @Component({
   selector: 'app-lobby',
@@ -52,8 +52,12 @@ export class LobbyComponent implements OnInit {
     this.router.navigate(['/gamelobby']);
   }
 
-  //whatsathissa?
   joinGroup(groupId: string) {
-    console.log("joinnn ", groupId);
+    const group: JoinGroupModel = {
+      groupId: groupId,
+      playerId: this.playerId,
+    };
+    this.store.dispatch(joinGroup(group));
+    this.router.navigate(['/gamelobby']);
   }
 }
