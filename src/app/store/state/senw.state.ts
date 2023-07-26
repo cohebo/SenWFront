@@ -15,4 +15,5 @@ export interface State {
     player: Player;
     locationX: number;
     locationY: number;
+    gamelobby: [];
 }

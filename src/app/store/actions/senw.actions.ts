@@ -70,5 +70,27 @@ export const joinGroupSuccess = createAction(
       }>()
 );
 
+export const startUselessBox = createAction(
+    "[SenW] Start uselessbox game",
+    props<{gameName: string, groupId: string}>()
+);
+
+export const startUselessBoxSuccess = createAction(
+    "[SenW] Start uselessbox game success",
+    props<{
+        model: any;
+      }>()
+);
+
+export const uselessBoxNextRound = createAction(
+    "[SenW] UselessBox next round"
+);
+
+export const uselessBoxNextRoundSuccess = createAction(
+    "[SenW] UselessBox next round",
+    props<{
+        model: any;
+      }>()
+);
 
 //todo: errors toevoegen

@@ -10,10 +10,35 @@ export const selectGroups = createSelector(
       }
 );
 
+export const selectGroupId = createSelector(
+  selectSenwState,
+  (state: State) => {
+      return state.groupId;
+    }
+);
+
 export const selectPlayerId = createSelector(
   selectSenwState,
   (state: State) => {
       return state.playerId;
+    }
+);
+
+
+export const selectGroupLeaderId = createSelector(
+  selectSenwState,
+  (state: State) => {
+      return state.groupLeaderId;
+    }
+);
+
+export const selectIsGroupLeader = createSelector(
+  selectSenwState,
+  (state: State) => {
+    if(state.groupLeaderId == state.playerId){
+      return true;
+    }
+    return false;
     }
 );
 
@@ -29,5 +54,14 @@ export const selectGroupName = createSelector(
   selectSenwState,
   (state: State) => {
       return state.groupName;
+    }
+);
+
+
+//ff cheat for test enzo
+export const selectGameLobby = createSelector(
+  selectSenwState,
+  (state: State) => {
+      return state.gamelobby;
     }
 );

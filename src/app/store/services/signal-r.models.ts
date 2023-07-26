@@ -57,6 +57,12 @@ export interface JoinGroupModel {
   playerId: string;
 }
 
+export interface CreateGameModel {
+  gameName: string;
+  groupId: string;
+}
+
+
 export interface GroupJoinedModel {
   groupId: string;
   groupName: string;

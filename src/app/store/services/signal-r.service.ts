@@ -11,10 +11,12 @@ import {
   CreatePlayerModel,
   PlayerCreatedModel,
   JoinGroupModel,
-  GroupJoinedModel
+  GroupJoinedModel,
+  CreateGameModel
 } from "./signal-r.models";
 import { environment } from "src/environments/environment";
-import { connecting, connectingFailed, connectingSuccess, disconnected, joinGroupSuccess, reconnectingSuccess } from "../actions/senw.actions";
+import { connecting, connectingFailed, connectingSuccess, disconnected, joinGroupSuccess, reconnectingSuccess, startUselessBoxSuccess } from "../actions/senw.actions";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -26,7 +28,7 @@ export class SignalRService {
   /**
    *
    */
-  constructor(private store: Store, @Inject(PLATFORM_ID) private platformId: object) {
+  constructor(private store: Store, @Inject(PLATFORM_ID) private platformId: object, private router: Router) {
     if (isPlatformBrowser(this.platformId)) {
       this.hubConnection = new signalR.HubConnectionBuilder()
         //.withUrl(environment.signalRUrl + "/signalr")
@@ -176,13 +178,40 @@ export class SignalRService {
     return observable;
   }
 
+  public createGame(model: CreateGameModel): Observable<any> {
+    const promise = this.hubConnection.invoke<AnalyserNode>(
+      "CreateGame",
+      model.gameName,
+      model.groupId,
+    );
+    //this.addGroupEventListeners();
+    const observable = from(promise)
+      .pipe(
+        map((value) => {
+            return value;
+        })
+      )
+      .pipe(
+        map((apiModel) => {
+          return {
+            apiModel
+          };
+        })
+      );
+    return observable;
+  }
+
 //   // Listen to group events
   public addGroupEventListeners = () => {
     console.log("activated");
     // These actions do not need a success and error action as the result has already succeeded in the backend
     this.hubConnection.on("groupJoined", (data: GroupJoinedModel) => {
-      console.log("yoyo event listner yo");
       this.store.dispatch(joinGroupSuccess({ model: data }));
+    });
+
+    this.hubConnection.on("gameStarted", (data: any) => {
+      this.store.dispatch(startUselessBoxSuccess({ model: data }));
+      this.router.navigate(['/uselessbox']);
     });
   };
 

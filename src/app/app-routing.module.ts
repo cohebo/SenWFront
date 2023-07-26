@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GameLobbyComponent } from './components/game-lobby/game-lobby.component';
+import { GameUselessBoxComponent } from './components/games/game-useless-box/game-useless-box.component';
 import { LobbyComponent } from './components/lobby/lobby.component';
 import { NewPlayerComponent } from './components/new-player/new-player.component';
 
@@ -21,6 +22,12 @@ const routes: Routes = [
     path: "gamelobby",
     pathMatch: "full",
     component: GameLobbyComponent,
+    data: { state: "senw" },
+  },
+  {
+    path: "uselessbox",
+    pathMatch: "full",
+    component: GameUselessBoxComponent,
     data: { state: "senw" },
   },
 ];
