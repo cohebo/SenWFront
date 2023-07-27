@@ -223,6 +223,7 @@ export class SignalRService {
       .pipe(
         map((apiModel) => {
           return {
+            gameId: apiModel.gameId,
             state: apiModel.state,
             count: apiModel.count,
           };
@@ -244,7 +245,7 @@ export class SignalRService {
       this.router.navigate(['/uselessbox']);
     });
 
-    this.hubConnection.on("uselessboxProgress", (data: UselessBoxProgressModel) => {
+    this.hubConnection.on("progressUselessBoxGame", (data: UselessBoxProgressModel) => {
       this.store.dispatch(uselessBoxNextRoundSuccess({ model: data }));
     });
   };

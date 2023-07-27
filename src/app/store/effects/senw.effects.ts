@@ -167,14 +167,12 @@ export class SenwEffects {
             map((createGameModel) =>
               uselessBoxNextRoundSuccess({
                 model: {
+                  gameId: createGameModel.gameId,
                   state: createGameModel.state,
                   count: createGameModel.count,
                 }
               }),
             ),
-            tap(() => {
-              this.router.navigate(['/uselessbox']);
-            }),
             // catchError((error) => of(createGroepError({ e: error })))
           )
       )

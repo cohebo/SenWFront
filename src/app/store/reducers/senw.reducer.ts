@@ -37,7 +37,7 @@ export const initialState: State = {
   gamelobby: {
     name: "",
     players: [],
-    game: null,
+    game: undefined,
     active: false,
   },
 };
@@ -113,9 +113,10 @@ export const initialState: State = {
           ...state.gamelobby,
           game: props.model ? {
             ...state.gamelobby.game!,
+            gameId: props.model.gameId,
             state: props.model.state,
             count: props.model.count,
-          } : null,
+          } : undefined,
         },
       })
     ),

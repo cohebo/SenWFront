@@ -93,6 +93,8 @@ export interface UselessBoxMakeProgressModel {
 }
 
 export interface UselessBoxProgressModel {
+  // todo: fix backend frontend problem where gamestate gets set null. for now, set gameId too.
+  gameId: number;
   state: boolean;
   count: number;
 }
