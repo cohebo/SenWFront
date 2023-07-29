@@ -2,7 +2,9 @@ import { State } from "../state/senw.state";
 import { createReducer, on } from "@ngrx/store";
 import { connectingSuccess, createGroupSuccess, getGroupsSuccess, startConnection,
          createPlayerSuccess, 
-         joinGroupSuccess} from "../actions/senw.actions";
+         joinGroupSuccess,
+         startUselessBoxSuccess,
+         uselessBoxNextRoundSuccess} from "../actions/senw.actions";
 
 
 export const initialState: State = {
@@ -31,7 +33,13 @@ export const initialState: State = {
     Draws: 0
   },
   players: [],
-  groupLeaderId: ""
+  groupLeaderId: "",
+  gamelobby: {
+    name: "",
+    players: [],
+    game: undefined,
+    active: false,
+  },
 };
   export const reducer = createReducer(
     initialState,
@@ -88,6 +96,28 @@ export const initialState: State = {
         groupName: props.model.groupName,
         players: props.model.players,
         groupLeaderId: props.model.groupLeaderId,
+      })
+    ),
+    on(
+      startUselessBoxSuccess,
+      (state, props): State => ({
+        ...state,
+        gamelobby: props.model,
+      })
+    ),
+    on(
+      uselessBoxNextRoundSuccess,
+      (state, props): State => ({
+        ...state,
+        gamelobby: {
+          ...state.gamelobby,
+          game: props.model ? {
+            ...state.gamelobby.game!,
+            gameId: props.model.gameId,
+            state: props.model.state,
+            count: props.model.count,
+          } : undefined,
+        },
       })
     ),
   );

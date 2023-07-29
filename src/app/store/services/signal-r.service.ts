@@ -11,10 +11,15 @@ import {
   CreatePlayerModel,
   PlayerCreatedModel,
   JoinGroupModel,
-  GroupJoinedModel
+  GroupJoinedModel,
+  CreateGameModel,
+  GameCreatedModel,
+  UselessBoxProgressModel,
+  UselessBoxMakeProgressModel
 } from "./signal-r.models";
 import { environment } from "src/environments/environment";
-import { connecting, connectingFailed, connectingSuccess, disconnected, joinGroupSuccess, reconnectingSuccess } from "../actions/senw.actions";
+import { connecting, connectingFailed, connectingSuccess, disconnected, joinGroupSuccess, reconnectingSuccess, startUselessBoxSuccess, uselessBoxNextRoundSuccess } from "../actions/senw.actions";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -26,7 +31,7 @@ export class SignalRService {
   /**
    *
    */
-  constructor(private store: Store, @Inject(PLATFORM_ID) private platformId: object) {
+  constructor(private store: Store, @Inject(PLATFORM_ID) private platformId: object, private router: Router) {
     if (isPlatformBrowser(this.platformId)) {
       this.hubConnection = new signalR.HubConnectionBuilder()
         //.withUrl(environment.signalRUrl + "/signalr")
@@ -176,13 +181,72 @@ export class SignalRService {
     return observable;
   }
 
+  public createGame(model: CreateGameModel): Observable<GameCreatedModel> {
+    const promise = this.hubConnection.invoke<GameCreatedModel>(
+      "CreateGame",
+      model.gameName,
+      model.groupId,
+    );
+    //this.addGroupEventListeners();
+    const observable = from(promise)
+      .pipe(
+        map((value) => {
+            return value;
+        })
+      )
+      .pipe(
+        map((apiModel) => {
+          return {
+            name: apiModel.name,
+            players: apiModel.players,
+            game: apiModel.game,
+            active: apiModel.active,
+          };
+        })
+      );
+    return observable;
+  }
+
+  public uselessBoxProgress(model: UselessBoxMakeProgressModel): Observable<UselessBoxProgressModel> {
+    const promise = this.hubConnection.invoke<UselessBoxProgressModel>(
+      "NextRoundUselessBox",
+      model.groupId,
+      model.gameId,
+    );
+    //this.addGroupEventListeners();
+    const observable = from(promise)
+      .pipe(
+        map((value) => {
+            return value;
+        })
+      )
+      .pipe(
+        map((apiModel) => {
+          return {
+            gameId: apiModel.gameId,
+            state: apiModel.state,
+            count: apiModel.count,
+          };
+        })
+      );
+    return observable;
+  }
+
 //   // Listen to group events
   public addGroupEventListeners = () => {
     console.log("activated");
     // These actions do not need a success and error action as the result has already succeeded in the backend
     this.hubConnection.on("groupJoined", (data: GroupJoinedModel) => {
-      console.log("yoyo event listner yo");
       this.store.dispatch(joinGroupSuccess({ model: data }));
+    });
+
+    this.hubConnection.on("gameStarted", (data: GameCreatedModel) => {
+      this.store.dispatch(startUselessBoxSuccess({ model: data }));
+      this.router.navigate(['/uselessbox']);
+    });
+
+    this.hubConnection.on("progressUselessBoxGame", (data: UselessBoxProgressModel) => {
+      this.store.dispatch(uselessBoxNextRoundSuccess({ model: data }));
     });
   };
 

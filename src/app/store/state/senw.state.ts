@@ -1,3 +1,4 @@
+import { GameLobby } from "src/app/models/gamelobby";
 import { Group } from "src/app/models/group";
 import { Player } from "src/app/models/player";
 
@@ -15,4 +16,5 @@ export interface State {
     player: Player;
     locationX: number;
     locationY: number;
+    gamelobby: GameLobby;
 }

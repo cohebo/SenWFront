@@ -1,0 +1,8 @@
+<p>game-useless-box works!</p>
+<h1>Count:</h1>
+<h2>{{ count$ | async }}</h2>
+<h1>State:</h1>
+<h2>{{ state$ | async }}</h2>
+<div *ngIf="(isGroupLeader$ | async) == (state$ | async)">
+    <button (click)="submit()">Button</button>
+</div>

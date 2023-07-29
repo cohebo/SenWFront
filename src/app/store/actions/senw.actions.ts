@@ -1,7 +1,7 @@
 // connections
 
 import { createAction, props } from "@ngrx/store";
-import { GroupCreatedModel, GroupJoinedModel, GroupModel, PlayerCreatedModel } from "../services/signal-r.models";
+import { GameCreatedModel, GroupCreatedModel, GroupJoinedModel, GroupModel, PlayerCreatedModel, UselessBoxProgressModel } from "../services/signal-r.models";
 
 export const startConnection = createAction(
     "[SenW Connection] Start connection"
@@ -70,5 +70,28 @@ export const joinGroupSuccess = createAction(
       }>()
 );
 
+export const startUselessBox = createAction(
+    "[SenW] Start uselessbox game",
+    props<{gameName: string, groupId: string}>()
+);
+
+export const startUselessBoxSuccess = createAction(
+    "[SenW] Start uselessbox game success",
+    props<{
+        model: GameCreatedModel;
+      }>()
+);
+
+export const uselessBoxNextRound = createAction(
+    "[SenW] UselessBox next round",
+    props<{groupId: string, gameId: number}>()
+);
+
+export const uselessBoxNextRoundSuccess = createAction(
+    "[SenW] UselessBox next round",
+    props<{
+        model: UselessBoxProgressModel;
+      }>()
+);
 
 //todo: errors toevoegen

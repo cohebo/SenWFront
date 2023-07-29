@@ -2,4 +2,10 @@
 <br>
 <h2>{{ groupName$ | async }}</h2>
 <br>
-<h3 *ngFor="let player of (players$ | async)">{{ player.playerName }}</h3>
+<h3>Players:</h3>
+<div *ngFor="let player of (players$ | async)">
+    <h3>{{ player.playerName }}</h3>
+</div>
+<div *ngIf="isGroupLeader$ | async">
+    <button (click)="StartUselessBox()">Start uselessBox</button>
+</div>

@@ -42,14 +42,14 @@ export interface PlayerCreatedModel {
 //deze model of die hierboven.. merge dingetje
 
 export interface PlayerModel {
-  playerId: string,
-  playerName: string,
-  // gamesPlayed: null,
-  // wins: null,
-  // loses: null,
-  // draws: null,
-  locationX: number,
-  locationY: number,
+  playerId: string;
+  playerName: string;
+  locationX?: number;
+  locationY?: number;
+  avatar?: string;
+  wins?: number;
+  loses?: number;
+  draws?: number;
 }
 
 export interface JoinGroupModel {
@@ -57,9 +57,44 @@ export interface JoinGroupModel {
   playerId: string;
 }
 
+export interface CreateGameModel {
+  gameName: string;
+  groupId: string;
+}
+
+
 export interface GroupJoinedModel {
   groupId: string;
   groupName: string;
   players: Array<PlayerModel>
   groupLeaderId: string;
+}
+
+export interface GameCreatedModel {
+    name: string;
+    players?: Array<PlayerModel>;
+    game?: GameModel;
+    active: boolean;
+}
+
+export interface GameModel {
+    gameId: number;
+    name: string;
+    image: string;
+    title?: string;
+    description?: string;
+    state?: boolean;
+    count?: number;
+}
+
+export interface UselessBoxMakeProgressModel {
+  groupId: string;
+  gameId: number;
+}
+
+export interface UselessBoxProgressModel {
+  // todo: fix backend frontend problem where gamestate gets set null. for now, set gameId too.
+  gameId: number;
+  state: boolean;
+  count: number;
 }

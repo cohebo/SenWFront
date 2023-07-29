@@ -18,7 +18,7 @@ import { GroupListComponent } from './components/lobby/group-list/group-list.com
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { GameLobbyComponent } from './components/game-lobby/game-lobby.component';
-
+import { GameUselessBoxComponent } from './components/games/game-useless-box/game-useless-box.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { GameLobbyComponent } from './components/game-lobby/game-lobby.component
     HeaderComponent,
     FooterComponent,
     GameLobbyComponent,
+    GameUselessBoxComponent,
   ],
   imports: [
     BrowserModule,
