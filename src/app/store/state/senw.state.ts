@@ -17,4 +17,6 @@ export interface State {
     locationX: number;
     locationY: number;
     gamelobby: GameLobby;
+    message: string;
+
 }

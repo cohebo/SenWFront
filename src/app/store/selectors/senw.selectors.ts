@@ -85,3 +85,10 @@ export const selectUselessBoxCount = createSelector(
       return state.gamelobby.game?.count;
     }
 );
+
+export const selectChatMessage = createSelector(
+  selectSenwState,
+  (state: State) => {
+      return state.message;
+    }
+);

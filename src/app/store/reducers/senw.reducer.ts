@@ -4,7 +4,8 @@ import { connectingSuccess, createGroupSuccess, getGroupsSuccess, startConnectio
          createPlayerSuccess, 
          joinGroupSuccess,
          startUselessBoxSuccess,
-         uselessBoxNextRoundSuccess} from "../actions/senw.actions";
+         uselessBoxNextRoundSuccess,
+         getChatMessageSuccess} from "../actions/senw.actions";
 
 
 export const initialState: State = {
@@ -40,6 +41,7 @@ export const initialState: State = {
     game: undefined,
     active: false,
   },
+  message: ''
 };
   export const reducer = createReducer(
     initialState,
@@ -118,6 +120,13 @@ export const initialState: State = {
             count: props.model.count,
           } : undefined,
         },
+      })
+    ),
+    on(
+      getChatMessageSuccess,
+      (state, props): State => ({
+        ...state,
+        message: props.model.message,
       })
     ),
   );

@@ -60,4 +60,6 @@ export class LobbyComponent implements OnInit {
     this.store.dispatch(joinGroup(group));
     this.router.navigate(['/gamelobby']);
   }
+
+
 }

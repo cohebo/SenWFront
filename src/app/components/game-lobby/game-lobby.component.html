@@ -9,3 +9,14 @@
 <div *ngIf="isGroupLeader$ | async">
     <button (click)="StartUselessBox()">Start uselessBox</button>
 </div>
+
+
+<div>
+    
+    {{chatMessage}}
+
+    <form [formGroup]="newGroupForm" (ngSubmit)="SendMessage()">
+        <input type="text" formControlName="newChatMessage" placeholder="Send chat..." />
+        <button type="submit">Send</button>
+    </form>
+</div>

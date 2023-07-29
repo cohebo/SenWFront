@@ -15,10 +15,21 @@ import {
   CreateGameModel,
   GameCreatedModel,
   UselessBoxProgressModel,
-  UselessBoxMakeProgressModel
+  UselessBoxMakeProgressModel,
+  GetChatMessageModel
 } from "./signal-r.models";
 import { environment } from "src/environments/environment";
-import { connecting, connectingFailed, connectingSuccess, disconnected, joinGroupSuccess, reconnectingSuccess, startUselessBoxSuccess, uselessBoxNextRoundSuccess } from "../actions/senw.actions";
+import { 
+  connecting, 
+  connectingFailed, 
+  connectingSuccess, 
+  disconnected, 
+  joinGroupSuccess, 
+  reconnectingSuccess, 
+  startUselessBoxSuccess, 
+  uselessBoxNextRoundSuccess,
+  getChatMessageSuccess 
+} from "../actions/senw.actions";
 import { Router } from "@angular/router";
 
 @Injectable({
@@ -232,6 +243,33 @@ export class SignalRService {
     return observable;
   }
 
+
+  public getChatMessage(model: GetChatMessageModel): Observable<GetChatMessageModel> {
+    const promise = this.hubConnection.invoke<GetChatMessageModel>(
+      "GetChatMessage",
+      model.groupId,
+      model.playerId,
+      model.message
+    );
+    //this.addGroupEventListeners();
+    const observable = from(promise)
+      .pipe(
+        map((value) => {
+            return value;
+        })
+      )
+      .pipe(
+        map((apiModel) => {
+          return {
+            groupId: apiModel.groupId,
+            playerId: apiModel.playerId,
+            message: apiModel.message,
+          };
+        })
+      );
+    return observable;
+  }
+
 //   // Listen to group events
   public addGroupEventListeners = () => {
     console.log("activated");
@@ -248,6 +286,11 @@ export class SignalRService {
     this.hubConnection.on("progressUselessBoxGame", (data: UselessBoxProgressModel) => {
       this.store.dispatch(uselessBoxNextRoundSuccess({ model: data }));
     });
+
+    this.hubConnection.on("getChatMessage", (data: GetChatMessageModel) => {
+      this.store.dispatch(getChatMessageSuccess({ model: data }));
+    });
+    
   };
 
   public stopConnection(): void {

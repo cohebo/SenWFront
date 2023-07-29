@@ -98,3 +98,9 @@ export interface UselessBoxProgressModel {
   state: boolean;
   count: number;
 }
+
+export interface GetChatMessageModel {
+  groupId: string;
+  playerId: string;
+  message: string;
+}
