@@ -4,8 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Player } from 'src/app/models/player';
+import { Message } from 'src/app/models/message';
 import { startConnection, startUselessBox, getChatMessage } from 'src/app/store/actions/senw.actions';
-import { selectGroupId, selectGroupName, selectIsGroupLeader, selectPlayers } from 'src/app/store/selectors/senw.selectors';
+import { selectChatHistory, selectGroupId, selectGroupName, selectIsGroupLeader, selectPlayers } from 'src/app/store/selectors/senw.selectors';
 import { CreateGameModel } from 'src/app/store/services/signal-r.models';
 import { selectGroups, selectPlayerId, selectChatMessage } from 'src/app/store/selectors/senw.selectors';
 import { GetChatMessageModel } from 'src/app/store/services/signal-r.models';
@@ -33,6 +34,9 @@ export class GameLobbyComponent implements OnInit {
   chatMessage$: Observable<string> = this.store.select(selectChatMessage);
   chatMessage: string = "";
 
+  chatHistory$: Observable<Array<Message>> = this.store.select(selectChatHistory);
+  chatHistory!: Message[];
+
   newGroupForm: FormGroup;
   
   constructor(private store: Store, private formBuilder: FormBuilder, private router: Router) {
@@ -46,6 +50,7 @@ export class GameLobbyComponent implements OnInit {
     this.groupId$.subscribe((g) => { this.groupId = g});
     this.playerId$.subscribe((g) => { this.playerId = g});
     this.chatMessage$.subscribe((g) => { this.chatMessage = g});
+    this.chatHistory$.subscribe((g) => { this.chatHistory = g});
   }
 
   StartUselessBox(): void{

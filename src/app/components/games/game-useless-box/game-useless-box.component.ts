@@ -20,6 +20,7 @@ export class GameUselessBoxComponent implements OnInit {
   gameId: number = 0;
   state$: Observable<boolean | undefined> = this.store.select(selectUselessBoxState);
   count$: Observable<number | undefined> = this.store.select(selectUselessBoxCount);
+  count: number = 0;
 
   constructor(private store: Store) {
   }
@@ -27,6 +28,7 @@ export class GameUselessBoxComponent implements OnInit {
   ngOnInit(): void {
     this.gameId$.subscribe((g) => { this.gameId = g || 0 });
     this.groupId$.subscribe((g) => { this.groupId = g });
+    this.count$.subscribe((g) => { this.count = g  || 0});
   }
 
   submit(): void {

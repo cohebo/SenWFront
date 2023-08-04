@@ -92,3 +92,10 @@ export const selectChatMessage = createSelector(
       return state.message;
     }
 );
+
+export const selectChatHistory = createSelector(
+  selectSenwState,
+  (state: State) => {
+    return state.chatHistory;
+  }
+)

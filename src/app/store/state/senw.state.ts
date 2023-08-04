@@ -1,6 +1,7 @@
 import { GameLobby } from "src/app/models/gamelobby";
 import { Group } from "src/app/models/group";
 import { Player } from "src/app/models/player";
+import { Message } from "src/app/models/message";
 
 export const featureKey = "senw";
 
@@ -18,5 +19,6 @@ export interface State {
     locationY: number;
     gamelobby: GameLobby;
     message: string;
+    chatHistory: Array<Message>;
 
 }

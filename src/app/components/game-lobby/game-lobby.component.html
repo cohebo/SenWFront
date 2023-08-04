@@ -13,7 +13,9 @@
 
 <div>
     
-    {{chatMessage}}
+    <div *ngFor="let message of chatHistory">
+        <b>{{ message.playerName }}:</b> {{ message.chatMessage }}
+    </div>
 
     <form [formGroup]="newGroupForm" (ngSubmit)="SendMessage()">
         <input type="text" formControlName="newChatMessage" placeholder="Send chat..." />

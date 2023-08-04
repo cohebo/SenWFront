@@ -41,7 +41,8 @@ export const initialState: State = {
     game: undefined,
     active: false,
   },
-  message: ''
+  message: '',
+  chatHistory: [],
 };
   export const reducer = createReducer(
     initialState,
@@ -127,6 +128,11 @@ export const initialState: State = {
       (state, props): State => ({
         ...state,
         message: props.model.message,
-      })
-    ),
+        chatHistory: [...state.chatHistory, {
+              playerId: props.model.playerId,
+              playerName: state.players.find((p) => p.playerId === props.model.playerId)?.playerName,
+              chatMessage: props.model.message
+            }]
+          })
+      ),
   );
